@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src='jquery.js'></script>
+    <script src='partial.js'></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="todos">
+        <input type="text" class="create">
+        <ul class="list"></ul>
+    </div>
+    <script>
+        $('body').on('keyup', '.create', _.pipe(
+            _.v('target'),
+            _.tap(
+                input => ({ body: input.value }),
+                _.t('todo', `<li class='todo_item'>
+                    <div class='body'>{{todo.body}}</div>
+                </li>`),
+                $,
+                _('appendTo', '#todos .list')
+            ),
+            _.set('value', '')
+        ))e
+        ee</body >
+
+</html >
