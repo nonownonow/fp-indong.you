@@ -1,35 +1,38 @@
-export function filterUnder30 (arr) {
+export function filter (arr, predicate) {
   const newArr = []
   for (let i = 0, len = arr.length; i < len; i++) {
-    if (arr[i].age < 30) {
-      newArr.push(arr[i])
-    }
+    const el = arr[i]
+    if (predicate(el)) newArr.push(el)
   }
   return newArr
 }
 
-export function filter30andOvere (arr) {
+export function map (arr, mapper) {
   const newArr = []
   for (let i = 0, len = arr.length; i < len; i++) {
-    if (arr[i].age >= 30) {
-      newArr.push(arr[i])
-    }
+    newArr.push(mapper(arr[i]))
   }
   return newArr
 }
 
-export function mapAge (arr) {
-  const newArr = []
-  for (let i = 0, len = arr.length; i < len; i++) {
-    newArr[i] = arr[i].age
-  }
-  return newArr
+export function filterUnder30AgeSize (users) {
+  return getLength(
+    map(
+      filter(users, user => user.age < 30),
+      user => user.age
+    )
+  )
 }
 
-export function mapName (arr) {
-  const newArr = []
-  for (let i = 0, len = arr.length; i < len; i++) {
-    newArr[i] = arr[i].name
-  }
-  return newArr
+export function mapName30andOverUsersSize (users) {
+  return getLength(
+    map(
+      filter(users, user => user.age >= 30),
+      user => user.name
+    )
+  )
+}
+
+function getLength (arr) {
+  return arr.length
 }

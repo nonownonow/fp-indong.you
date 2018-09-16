@@ -13,18 +13,12 @@ const users = [
 describe('ch1', () => {
   describe('filter', () => {
     it('filter user who are under 30 years of age', () => {
-      expect(x.filterUnder30(users).length).toBe(4)
-    })
-    it('filter user who are 30 and over of age', () => {
-      expect(x.filter30andOvere(users).length).toBe(3)
+      expect(x.filterUnder30AgeSize(users)).toBe(4)
     })
   })
   describe('map', () => {
-    it('extract age in user', () => {
-      expect(x.mapAge(users)).toEqual([32, 25, 32, 28, 27, 32, 24])
-    })
-    it('extract name in user', () => {
-      expect(x.mapName(users).slice(0, 2)).toEqual(['ID', 'HA'])
+    it('extract name in user who are 30andOver', () => {
+      expect(x.mapName30andOverUsersSize(users)).toBe(3)
     })
   })
 })
