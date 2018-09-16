@@ -3,5 +3,8 @@
   "env": {
     "node": true
   },
-  "extends": "standard"
+  "extends": "standard",
+  "rules": {
+    "camelcase": 0
+  }
 }

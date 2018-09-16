@@ -16,23 +16,23 @@ export function map (arr, mapper) {
 }
 
 export function filterUnder30AgeSize (users) {
-  return getLength(
+  return get_length(
     map(
-      filter(users, user => user.age < 30),
-      user => user.age
+      filter(users, v => v.age < 30),
+      v => v.age
     )
   )
 }
 
 export function mapName30andOverUsersSize (users) {
-  return getLength(
+  return get_length(
     map(
-      filter(users, user => user.age >= 30),
-      user => user.name
+      filter(users, v => v.age >= 30),
+      v => v.name
     )
   )
 }
 
-function getLength (arr) {
+function get_length (arr) {
   return arr.length
 }
