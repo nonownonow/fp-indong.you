@@ -14,6 +14,7 @@ describe('ch1', () => {
   describe('filter', () => {
     it('filter user who are under 30 years of age', () => {
       expect(x.filterUnder30AgeSize(users)).toBe(4)
+      expect(x.filterUnder30AgeSize2(users)).toBe(4)
     })
   })
   describe('map', () => {
