@@ -10,6 +10,32 @@ const users = [
   { id: 7, name: 'HI', age: 24 }
 ]
 
+class User {
+  constructor (id, name, age) {
+    this.id = id
+    this.name = name
+    this.age = age
+  }
+  getId () {
+    return this.id
+  }
+  getName () {
+    return this.name
+  }
+  getAGe () {
+    return this.age
+  }
+}
+const users2 = [
+  new User(1, 'ID', 32),
+  new User(2, 'HA', 25),
+  new User(3, 'BJ', 32),
+  new User(4, 'PJ', 28),
+  new User(5, 'JE', 27),
+  new User(6, 'JM', 32),
+  new User(7, 'HI', 24)
+]
+
 describe('ch1', () => {
   describe('filter', () => {
     it('filter user who are under 30 years of age', () => {
@@ -20,6 +46,20 @@ describe('ch1', () => {
   describe('map', () => {
     it('extract name in user who are 30andOver', () => {
       expect(x.mapName30andOverUsersSize(users)).toBe(3)
+    })
+  })
+  describe('find', () => {
+    it('findById is refacot filter function', () => {
+      expect(x.findBy('id', users, 3)).toEqual(users[2])
+      expect(x.findBy('id', users, 5)).toEqual(users[4])
+    })
+    it('findByName is refactor filter function which has name parameter', () => {
+      expect(x.findBy('name', users, 'BJ')).toEqual(users[2])
+      expect(x.findBy('name', users, 'JE')).toEqual(users[4])
+    })
+    it('findByAge is refactor filter function which has age parameter', () => {
+      expect(x.findBy('age', users, 28)).toEqual(users[3])
+      expect(x.findBy('age', users, 25)).toEqual(users[1])
     })
   })
 })

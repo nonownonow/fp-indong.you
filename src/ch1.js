@@ -7,6 +7,38 @@ export function filter (arr, predicate) {
   return newArr
 }
 
+export function findById (list, id) {
+  for (var i = 0, len = list.length; i < len; i++) {
+    if (list[i].id === id) return list[i]
+  }
+}
+
+export function findByName (list, name) {
+  for (var i = 0, len = list.length; i < len; i++) {
+    if (list[i].name === name) return list[i]
+  }
+}
+
+export function findByAge (list, age) {
+  for (var i = 0, len = list.length; i < len; i++) {
+    if (list[i].age === age) return list[i]
+  }
+}
+
+export function findBy (key, list, value) {
+  for (var i = 0, len = list.length; i < len; i++) {
+    if (list[i][key] === value) return list[i]
+  }
+}
+
+export function find (arr, predicate) {
+  for (let i = 0, len = arr.length; i < len; i++) {
+    if (predicate(arr[i])) {
+      return arr[i]
+    }
+  }
+}
+
 export function map (arr, mapper) {
   const newArr = []
   for (let i = 0, len = arr.length; i < len; i++) {
