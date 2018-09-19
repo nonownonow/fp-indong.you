@@ -22,7 +22,7 @@ class User {
   getName () {
     return this.name
   }
-  getAGe () {
+  getAge () {
     return this.age
   }
 }
@@ -49,6 +49,7 @@ describe('ch1', () => {
     })
   })
   describe('find', () => {
+    const predicate = jest.fn(v => v.id === 3)
     it('findById is refacot filter function', () => {
       expect(x.findBy('id', users, 3)).toEqual(users[2])
       expect(x.findBy('id', users, 5)).toEqual(users[4])
@@ -60,6 +61,13 @@ describe('ch1', () => {
     it('findByAge is refactor filter function which has age parameter', () => {
       expect(x.findBy('age', users, 28)).toEqual(users[3])
       expect(x.findBy('age', users, 25)).toEqual(users[1])
+    })
+    it('find user who are pass the predicate function', () => {
+      expect(x.find(users, predicate)).toEqual({ id: 3, name: 'BJ', age: 32 })
+      expect(x.find(users2, v => v.getAge() === 25).getName()).toBe('HA')
+    })
+    it('predicate in find is called just until find the element', () => {
+      expect(predicate.mock.calls.length).toBe(3)
     })
   })
 })
