@@ -148,3 +148,19 @@ export function L (str) {
   const splitted = str.split('=>')
   return L[mKey] = new Function(splitted[0], `return (${splitted[1]})`)
 }
+
+let namedFn = function () {
+  return namedFn
+}
+export const namedFnBk = namedFn
+namedFn = 'overwiteNamedFn'
+export let name = 0
+let namedFn2 = function namedFnTest () {
+  return namedFnTest
+}
+export let namedFn3 = function namedFnTest () {
+  return namedFnTest
+}
+name = ++name
+export const namedFnBk2 = namedFn2
+namedFn2 = 'overwiteNamedFn'

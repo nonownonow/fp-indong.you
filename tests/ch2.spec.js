@@ -110,6 +110,13 @@ describe('ch2 - to deep dive in', () => {
         _.map(arr, (v, i) => x.L('v,i=>i*2')(v, i))
         console.timeEnd('eval5')
       })
+      it('2.2.7 named function', () => {
+        expect(x.namedFnBk()).not.toBeInstanceOf(Function)
+        expect(x.namedFnBk2()).toBeInstanceOf(Function)
+        expect(x.namedFnBk2.name).toBe('namedFnTest')
+        expect(x.name).toBe(1)
+        expect(x.namedFn3.name === x.namedFnBk2.name).toBeTruthy()
+      })
     })
   })
   describe('execute function and parameter and dot', () => {})
