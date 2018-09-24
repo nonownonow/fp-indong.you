@@ -164,3 +164,14 @@ export let namedFn3 = function namedFnTest () {
 name = ++name
 export const namedFnBk2 = namedFn2
 namedFn2 = 'overwiteNamedFn'
+
+export function flatten (arr, newArr = []) {
+  arr.forEach(v => Array.isArray(v) ? flatten(v, newArr) : newArr.push(v))
+  return newArr
+}
+export function flatten2 (arr) {
+  return function f (arr, newArr) {
+    arr.forEach(v => Array.isArray(v) ? f(v, newArr) : newArr.push(v))
+    return newArr
+  }(arr, [])
+}

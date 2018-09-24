@@ -117,6 +117,10 @@ describe('ch2 - to deep dive in', () => {
         expect(x.name).toBe(1)
         expect(x.namedFn3.name === x.namedFnBk2.name).toBeTruthy()
       })
+      it('2.2.8 recursive using named function', () => {
+        expect(x.flatten([1, [2], [3, 4]])).toEqual([1, 2, 3, 4])
+        expect(x.flatten2([1, [2], [3, 4]])).toEqual([1, 2, 3, 4])
+      })
     })
   })
   describe('execute function and parameter and dot', () => {})
