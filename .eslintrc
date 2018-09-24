@@ -5,6 +5,7 @@
   },
   "extends": "standard",
   "rules": {
-    "camelcase": 0
+    "camelcase": 0,
+    "wrap-iife":0
   }
 }
