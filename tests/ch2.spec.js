@@ -1,5 +1,6 @@
 import * as x from '../src/ch2/ch2'
 import * as _ from 'underscore'
+import { thisTest } from '../src/ch2/ch2'
 
 describe('ch2 - to deep dive in', () => {
   describe('object and brackets', () => {
@@ -123,7 +124,28 @@ describe('ch2 - to deep dive in', () => {
       })
     })
   })
-  describe('execute function and parameter and dot', () => {})
+  describe('execute function and parameter and dot', () => {
+    it('2.3.1 deep dive to parentheses', () => {
+
+    })
+    it('2.3.2 deep dive to parameter', () => {
+
+    })
+    it('2.3.3 deep dive to this', () => {
+
+    })
+    it('2.3.4 deep dive call, apply', () => {
+      const t = x.thisTest.call({ a: 1 }, 1, 2, 3)
+      expect(t.t).toEqual({ a: 1 })
+      expect(t.a[0]).toBe(1)
+      expect(x.thisTest.apply(void 0, [1, 2, 3]).t).toBeUndefined()
+      expect(x.thisTest.apply(void 0, { '0': 1, '1': 2, '2': 3, length: 3 }).a[1]).toBe(2)
+      expect(x.thisTest.apply(void 0, [1, 2].concat([3])).a.length).toBe(3)
+      const applyTest = x.applyTest(1, 2, 3)
+      expect(applyTest.t).toBe(1000)
+      expect(applyTest.a.length).toBe(2)
+    })
+  })
   describe('if else || && conditional ternary operator', () => {})
   describe('parentheses of function execution', () => {})
   describe('arrow function', () => {})

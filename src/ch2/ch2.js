@@ -175,3 +175,12 @@ export function flatten2 (arr) {
     return newArr
   }(arr, [])
 }
+
+export function thisTest (a, b, c) {
+  return { t: this, a: arguments }
+}
+
+export function applyTest () {
+  arguments.length--
+  return thisTest.apply(1000, arguments)
+}
