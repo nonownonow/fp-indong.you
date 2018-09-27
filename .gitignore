@@ -6,7 +6,7 @@ node_modules
 dist
 coverage
 package-lock.json
-
+lib
 # local env files
 .env.local
 .env.*.local

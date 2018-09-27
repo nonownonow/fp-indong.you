@@ -184,3 +184,58 @@ export function applyTest () {
   arguments.length--
   return thisTest.apply(1000, arguments)
 }
+
+export function toArray (pseudoArr) {
+  const slice = Array.prototype.slice
+  return slice.call(pseudoArr)
+}
+
+export function rest (arr, n = 1) {
+  return arr.slice(n)
+}
+
+// ch2.4
+
+export function testParenthese () {
+  if (function f1 () {}) {
+    f1()
+  }
+}
+
+export function testParenthese2 (n) {
+  let a
+
+  if (a = n) {
+    return a
+  } else if (typeof a === 'boolean' && !a) {
+    return `error false`
+  } else {
+    return `error zero`
+  }
+}
+
+export function testParenthese3 (n) {
+  const obj = {}
+  let c
+  if (c = obj.a = n) {
+    return obj.a
+  } else if (typeof obj.a === 'boolean' && !c) {
+    return 'error false'
+  } else {
+    return 'error zero'
+  }
+}
+
+export function testParenthese4 (n1, n2) {
+  let c
+  if (c = add(n1, n2)) {
+    return c
+  } else {
+    if ((function () { return true })()) {
+      return 'error: add result is zero'
+    }
+  }
+  function add (a, b) {
+    return a + b
+  }
+}

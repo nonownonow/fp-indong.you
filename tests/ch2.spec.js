@@ -1,6 +1,5 @@
-import * as x from '../src/ch2/ch2'
+import * as x from '../src/ch2'
 import * as _ from 'underscore'
-import { thisTest } from '../src/ch2/ch2'
 
 describe('ch2 - to deep dive in', () => {
   describe('object and brackets', () => {
@@ -145,8 +144,31 @@ describe('ch2 - to deep dive in', () => {
       expect(applyTest.t).toBe(1000)
       expect(applyTest.a.length).toBe(2)
     })
+    it('2.3.5 useful example of using "call"', () => {
+      expect(x.toArray({ '0': 0, '1': 1, '2': 2, 'length': 3 })).toEqual([0, 1, 2])
+      expect(x.rest([1, 2, 3])).toEqual([2, 3])
+      expect(x.rest([1, 2, 3], 2)).toEqual([3])
+    })
   })
-  describe('if else || && conditional ternary operator', () => {})
+  describe('if else || && conditional ternary operator', () => {
+    it('parentheses of "if"', () => {
+      expect(() => x.testParenthese()).toThrow('f1 is not defined')
+    })
+    it('2.4.2 ||&&', () => {
+      expect(x.testParenthese2(5)).toBe(5)
+      expect(x.testParenthese2(0)).toBe('error zero')
+      expect(x.testParenthese2(false)).toBe('error false')
+      expect(x.testParenthese3(5)).toBe(5)
+      expect(x.testParenthese3(0)).toBe('error zero')
+      expect(x.testParenthese3(false)).toBe('error false')
+      expect(x.testParenthese4(2, 3)).toBe(5)
+      expect(x.testParenthese4(2, -2)).toBe('error: add result is zero')
+    })
+    it('2.4.3 conditional ternary operator', () => {
+
+    })
+  })
+
   describe('parentheses of function execution', () => {})
   describe('arrow function', () => {})
 })
