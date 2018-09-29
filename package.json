@@ -31,6 +31,7 @@
     "regenerator-runtime": "^0.12.1"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "underscore": "^1.9.1"
   }
 }

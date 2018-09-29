@@ -1,7 +1,7 @@
 import * as x from '../src/ch2'
 import * as _ from 'underscore'
 
-describe('ch2 - to deep dive in', () => {
+describe.skip('ch2 - to deep dive in', () => {
   describe('object and brackets', () => {
     it('key/value', () => {
       expect(x.obj).toEqual({ a: 1, b: 2, c: 3, d: 4, 'e e': 5, f: 6, 'true': true, 3: '3' })
