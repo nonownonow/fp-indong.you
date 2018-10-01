@@ -158,7 +158,12 @@ describe('3 learn the fundmental of functional javascript by creating underscore
       // const res1 = _.map(list, v => mul10(sub10(square(v))))
       // const res2 = _.map(list, _.compose(mul10, sub10, square))
     })
-    describe('3.1.6 show each in functional angle', () => {
+    describe.only('3.1.6 show each in functional angle', () => {
+      const _printBool = jest.fn(x.printBool)
+      const arr = [1, 2, 0, 20, 50]
+      beforeEach(() => {
+        _printBool.mockClear()
+      })
       it(`c3-20 difference of "each" in 'underscore' and 'lodash'`, () => {
         const fn = jest.fn(v => v < 2)
         _.each([1, 2, 3, 4, 5], fn)
@@ -166,6 +171,23 @@ describe('3 learn the fundmental of functional javascript by creating underscore
         fn.mockClear()
         lodash.each([1, 2, 3, 4, 5], fn)
         expect(fn.mock.calls.length).toBe(2)
+      })
+      it(`c3-21`, () => {
+        _.each(arr, _printBool)
+        expect(_printBool.mock.calls.length).toBe(5)
+        _printBool.mockClear()
+        lodash.each(arr, _printBool)
+        expect(_printBool.mock.calls.length).toBe(3)
+        _printBool.mockClear()
+        lodash.each(arr, v => _printBool(v))
+        expect(_printBool.mock.calls.length).toBe(3)
+      })
+      it(`c3-22`, () => {
+        _.every(arr, _printBool)
+        expect(_printBool.mock.calls.length).toBe(3)
+        _printBool.mockClear()
+        _.some(arr, _printBool)
+        expect(_printBool.mock.calls.length).toBe(1)
       })
     })
   })
