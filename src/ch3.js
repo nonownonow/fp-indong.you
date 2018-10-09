@@ -37,6 +37,7 @@ export function identity (v) {
 export const idtt = identity
 
 export function values (data) {
+  if (Object.values) return Object.values(data)
   return map(data, identity)
 }
 export function argN (n) {
@@ -59,11 +60,11 @@ function bloop (new_data, create_body) {
 
     if (isArrayLike(data)) {
       for (let i = 0, len = data.length; i < len; i++) {
-        create_body(iterator(data[i], i, data), newData)
+        create_body(iterator(data[i], i, data), newData, data[i])
       }
     } else {
       for (let key of keys(data)) {
-        create_body(iterator(data[key], key, data), newData)
+        create_body(iterator(data[key], key, data), newData, data[key])
       }
       // for (let i = 0, k = keys(data), len = k.length; i < len; i++) {
       //   create_body(iterator(data[k[i]], k[i], data), newData)
@@ -95,4 +96,21 @@ export function isObject (target) {
 
 export function has (obj, key) {
   return obj != null && hasOwnProperty.call(obj, key)
+}
+
+// export function filter (arr, predicate) {
+//   const newArr = []
+//   each(arr, v => {
+//     if (predicate(v)) newArr.push(v)
+//   })
+//   return newArr
+// }
+
+export function filter () {
+  return bloop(
+    () => [],
+    (res, newData, v) => {
+      if (res) newData.push(v)
+    }
+  )(...arguments)
 }
