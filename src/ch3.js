@@ -37,7 +37,6 @@ export function identity (v) {
 export const idtt = identity
 
 export function values (data) {
-  if (Object.values) return Object.values(data)
   return map(data, identity)
 }
 export function argN (n) {
