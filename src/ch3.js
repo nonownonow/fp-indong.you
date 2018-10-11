@@ -45,6 +45,7 @@ export function argN (n) {
 
 export const arg0 = argN(0)
 export const arg1 = argN(1)
+
 export function keys (data) {
   return isObject(data) ? Object.keys(data) : []
 }
@@ -112,4 +113,22 @@ export function filter () {
       if (res) newData.push(v)
     }
   )(...arguments)
+}
+
+export function toArray (data) {
+  return Array.isArray(data) ? data : values(data)
+}
+export function rest (data, num = 1) {
+  return toArray(data).slice(num)
+}
+export function reverse (data) {
+  return toArray(data).reverse()
+}
+export function rester (fn, num = 1) {
+  return (...args) => fn(...rest(args, num))
+}
+export function cond (validator, func, alter) {
+  return (...args) => {
+    return validator(...args) ? func(...args) : alter && alter(...args)
+  }
 }
