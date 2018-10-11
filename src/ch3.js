@@ -118,9 +118,9 @@ export function filter () {
 export function constant (data) {
   return () => data
 }
-export function toArray (data) {
-  return Array.isArray(data) ? data : values(data)
-  // return cond(Array.isArray(data), constant, constant(values(data)))
+export function toArray () {
+  // return Array.isArray(data) ? data : values(data)
+  return cond(Array.isArray, identity, values)(...arguments)
 }
 export function rest (data, num = 1) {
   return toArray(data).slice(num)
@@ -135,4 +135,7 @@ export function cond (validator, func, alter) {
   return (...args) => {
     return validator(...args) ? func(...args) : alter && alter(...args)
   }
+}
+export function square (n) {
+  return cond(n => toString.call(n) === '[object Number]', n => n * n, constant(0))
 }
