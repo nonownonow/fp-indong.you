@@ -115,8 +115,12 @@ export function filter () {
   )(...arguments)
 }
 
+export function constant (data) {
+  return () => data
+}
 export function toArray (data) {
   return Array.isArray(data) ? data : values(data)
+  // return cond(Array.isArray(data), constant, constant(values(data)))
 }
 export function rest (data, num = 1) {
   return toArray(data).slice(num)
