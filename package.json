@@ -32,7 +32,11 @@
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
+    "esm": "^3.0.84",
+    "expect": "^23.6.0",
     "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "partial": "0.0.6",
     "underscore": "^1.9.1"
   }
 }

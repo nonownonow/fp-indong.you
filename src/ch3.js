@@ -54,21 +54,22 @@ export const each = bloop(idtt, noop)
 
 export const map = bloop(array, push_to)
 
-function bloop (new_data, create_body) {
+function bloop (new_data, create_body, stopper) {
   return (data, iterator) => {
     const newData = new_data(data)
 
     if (isArrayLike(data)) {
       for (let i = 0, len = data.length; i < len; i++) {
-        create_body(iterator(data[i], i, data), newData, data[i])
+        const memo = iterator(data[i], i, data)
+        if (!stopper) create_body(memo, newData, data[i])
+        else if (stopper(memo)) create_body(memo, newData, data[i])
       }
     } else {
       for (let key of keys(data)) {
-        create_body(iterator(data[key], key, data), newData, data[key])
+        const memo = iterator(data[key], key, data)
+        if (!stopper) create_body(memo, newData, data[key])
+        else if (stopper(memo)) create_body(memo, newData, data[key])
       }
-      // for (let i = 0, k = keys(data), len = k.length; i < len; i++) {
-      //   create_body(iterator(data[k[i]], k[i], data), newData)
-      // }
     }
     return newData
   }
@@ -107,14 +108,30 @@ export function has (obj, key) {
 // }
 
 export function filter () {
-  return bloop(
-    () => [],
-    (res, newData, v) => {
-      if (res) newData.push(v)
-    }
-  )(...arguments)
+  return bloop(array, cond(identity, rester(push)))(...arguments)
 }
 
+export function find () {
+  return bloop(noop, rester(idtt, 2), idtt)(...arguments)
+}
+export function negate (fn) {
+  return () => !fn(...arguments)
+}
+export function not (v) {
+  return !v
+}
+export function reject () {
+  return bloop(
+    array,
+    // cond(negate(identity), rester(push))
+    // cond(identity, noop, rester(push))
+    cond(not, rester(push))
+  )(...arguments)
+}
+export function push (arr, v) {
+  arr.push(v)
+  return arr
+}
 export function constant (data) {
   return () => data
 }
@@ -137,5 +154,5 @@ export function cond (validator, func, alter) {
   }
 }
 export function square (n) {
-  return cond(n => toString.call(n) === '[object Number]', n => n * n, constant(0))
+  return cond(n => toString.call(n) === '[object Number]', n => n * n, constant(0))(...arguments)
 }
