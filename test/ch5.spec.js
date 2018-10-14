@@ -180,5 +180,25 @@ describe(`ch5`, () => {
         _.callback(callbackFn)
       )).toEqual([1, 2, 3])
     })
+    it('5-25 _.if().else_if().else', async () => {
+      function is_1_async (a) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(a == 1), 100)
+        })
+      }
+      function is_2_async (a) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve(a == 2), 100)
+        })
+      }
+      const testFn = _.if(
+        is_1_async, _.constant('1입니다')
+      ).else_if(
+        is_2_async, _.constant('2입니다')
+      ).else(
+        _.constant('1도 아니고 2도 아닙니다.')
+      )
+      expect(await testFn(2)).toBe('2입니다')
+    })
   })
 })
