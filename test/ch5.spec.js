@@ -213,5 +213,20 @@ describe(`ch5`, () => {
           .else(_.c('isnt 1 and isnt 2'))
       )).toBe('isnt 1 and isnt 2')
     })
+    it('5-28', () => {
+      function mult (a, b) {
+        return a * b
+      }
+      const mult_all = _.map(function () {
+        return _.reduce(_.initial(arguments, 2), mult)
+      })
+      const mult_all2 = _.map(__(
+        _.args,
+        _.initial(2),
+        _.reduce(mult)
+      ))
+      expect(mult_all(10, 10, 2, [1, 2, 3])).toEqual([200, 400, 600])
+      expect(mult_all2(10, 10, 2, [1, 2, 3])).toEqual([200, 400, 600])
+    })
   })
 })
