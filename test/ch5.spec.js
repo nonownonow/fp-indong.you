@@ -228,5 +228,43 @@ describe(`ch5`, () => {
       expect(mult_all(10, 10, 2, [1, 2, 3])).toEqual([200, 400, 600])
       expect(mult_all2(10, 10, 2, [1, 2, 3])).toEqual([200, 400, 600])
     })
+    it('5-29', () => {
+      const res = _.go(
+        _.mr(10, 5),
+        _.all(
+          (a, b) => a + b,
+          (a, b) => a - b,
+          (a, b) => a * b
+        ),
+        toArray
+      )
+      expect(res).toEqual([15, 5, 50])
+      // expect(toArray(res)).toEqual([15, 5, 50])
+      expect(_.go(
+        _.mr(10, 5),
+        _.spread(
+          a => a * a,
+          b => b * b
+        ),
+        toArray
+      )).toEqual([100, 25])
+      expect(_.go(
+        10,
+        _.all(
+          a => a + 5,
+          a => a - 5,
+          a => a * 5
+        ),
+        _.spread(
+          a => a + 1,
+          b => b + 2,
+          c => c + 3
+        )
+      ))
+    })
   })
 })
+
+function toArray (...res) {
+  return Array.prototype.slice.call(res)
+}
