@@ -97,7 +97,7 @@ describe(`ch5`, () => {
       function mul (a, b, next) {
         setTimeout(() => {
           next(a * b)
-        }, 25)
+        }, 5)
       }
 
       expect(await _.go(
@@ -119,19 +119,19 @@ describe(`ch5`, () => {
       var add = _.callback(function (a, b, next) {
         setTimeout(function () {
           next(a + b)
-        }, 100)
+        }, 10)
       })
 
       var sub = _.callback(function (a, b, next) {
         setTimeout(function () {
           next(a - b)
-        }, 100)
+        }, 10)
       })
 
       var mul = _.callback(function (a, b, next) {
         setTimeout(function () {
           next(a * b)
-        }, 100)
+        }, 10)
       })
       expect(await _.go(
         _.mr(5, 10),
@@ -157,7 +157,7 @@ describe(`ch5`, () => {
       expect(await _.map([1, 2, 3], v => new Promise((resolve, reject) => {
         setTimeout(() => {
           resolve(v)
-        }, 100)
+        }, 10)
       }))).toEqual([1, 2, 3])
     })
     it('5-19 compose through sync function and async function by using pipelinee', async () => {
@@ -165,7 +165,7 @@ describe(`ch5`, () => {
         return new Promise((resolve, reject) => {
           setTimeout(() => {
             resolve(v)
-          }, 100)
+          }, 10)
         })
       }
       function callbackFn (v, next) {
@@ -182,12 +182,12 @@ describe(`ch5`, () => {
     })
     function is_1_async (a) {
       return new Promise((resolve) => {
-        setTimeout(() => resolve(a == 1), 100)
+        setTimeout(() => resolve(a == 1), 10)
       })
     }
     function is_2_async (a) {
       return new Promise((resolve) => {
-        setTimeout(() => resolve(a == 2), 100)
+        setTimeout(() => resolve(a == 2), 10)
       })
     }
     it('5-25 _.if().else_if().else', async () => {
@@ -235,8 +235,8 @@ describe(`ch5`, () => {
           (a, b) => a + b,
           (a, b) => a - b,
           (a, b) => a * b
-        ),
-        toArray
+        )
+        // (...args) => _.toArray(args)
       )
       expect(res).toEqual([15, 5, 50])
       // expect(toArray(res)).toEqual([15, 5, 50])
@@ -259,8 +259,61 @@ describe(`ch5`, () => {
           a => a + 1,
           b => b + 2,
           c => c + 3
-        )
+        ),
+        toArray
       ))
+    })
+    it('5-30', async () => {
+      expect(await _.go(
+        10,
+        _.all(
+          function (a) {
+            return new Promise((resolve) => {
+              setTimeout(function () {
+                resolve(a + 5)
+              }, 20)
+            })
+          },
+          function (a) { return a - 5 },
+          function (a) { return a * 5 }
+        ),
+        _.spread(
+          function (a) { return a + 1 },
+          _.callback(function (a, next) {
+            setTimeout(() => {
+              next(a + 1)
+            }, 20)
+          }),
+          function (a) { return a + 3 }
+        ),
+
+        toArray
+      )).toEqual([16, 6, 53])
+    })
+  })
+  describe('5.4.1 pipeline2', () => {
+    describe('5.4.1 use this in _.go', () => {
+      it('5-32 _.go.call', () => {
+        const user = { name: 'Cojamm' }
+        _.go.call(user,
+          32,
+          function (age) { this.age = age },
+          function () { this.job = 'Rapper' }
+        )
+        expect(user).toEqual({ name: 'Cojamm', age: 32, job: 'Rapper' })
+      })
+      it('5-33 _.indent', () => {
+        const spy = expect.createSpy().andReturn('hi')
+        const spy2 = expect.createSpy()
+        const f1 = _.indent(
+          spy,
+          spy2
+        )
+        f1(1, 2)
+        expect(spy.calls[0].context).toIncludeKeys(['parent', 'arguments'])
+        expect(toArray(...spy.calls[0].context['arguments'])).toEqual([1, 2])
+        expect(spy2.calls[0].arguments).toEqual('hi')
+      })
     })
   })
 })
