@@ -7,6 +7,7 @@
   "rules": {
     "camelcase": 0,
     "wrap-iife": 0,
-    "no-undef": 0
+    "no-undef": 0,
+    "no-return-assign": 0
   }
 }

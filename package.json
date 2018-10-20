@@ -4,7 +4,7 @@
   "description": "",
   "main": "_.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -r esm"
   },
   "keywords": [],
   "author": "",

@@ -1,6 +1,6 @@
+import * as x from '../src/ch5'
 const _ = require('partial-js')
 const expect = require('expect')
-
 describe(`ch5`, () => {
   const products = [
     { id: 1, name: '후드 집업', discounted_price: 6000, price: 10000 },
@@ -314,6 +314,43 @@ describe(`ch5`, () => {
         expect(toArray(...spy.calls[0].context['arguments'])).toEqual([1, 2])
         expect(spy2.calls[0].arguments).toEqual('hi')
       })
+    })
+  })
+  describe('5.6.5 collecting and filtering', () => {
+    const users = [
+      { id: 1, name: 'id' },
+      { id: 3, name: 'bj' },
+      { id: 6, name: 'pj' }
+    ]
+    const users2 = [
+      { id: 1, name: 'id', age: 33 },
+      { id: 2, name: 'bj', age: 33 },
+      { id: 3, name: 'pj', age: 29 },
+      { id: 4, name: 'pj', age: 27 }
+    ]
+    it('5-58 map and pluck', () => {
+      expect(x.pluck(users, 'id')).toEqual([1, 3, 6])
+    })
+    it('5-60 filter', () => {
+      expect(x.reject(users, v => v.id < 5)).toEqual([{ id: 6, name: 'pj' }])
+    })
+    it('5-61 difference, compact', () => {
+      expect(x.difference([1, 2, 1, 0, 3, 1, 4], [0, 1])).toEqual([2, 3, 4])
+      expect(x.compact([0, 1, false, 2, '', 3])).toEqual([1, 2, 3])
+    })
+    it('5-62 group_by', () => {
+      expect(x.group_by(users2, u => u.age)).toEqual({
+        27: [{ id: 4, name: 'pj', age: 27 }],
+        29: [{ id: 3, name: 'pj', age: 29 }],
+        33: [
+          { id: 1, name: 'id', age: 33 },
+          { id: 2, name: 'bj', age: 33 }
+        ]
+      })
+    })
+    it('5-63 some', () => {
+      expect(x.some([0, 0, 1, 0, 2])).toBe(true)
+      expect(x.some([0, 0, 1, 0, 2], v => v > 2)).toBe(false)
     })
   })
 })
