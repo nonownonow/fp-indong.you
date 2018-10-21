@@ -1,4 +1,6 @@
 import * as x from '../src/ch5'
+// when use esm library, _ dosn't work as partial, because it is proxy instance
+// so I import partial-js module as _ using commonjs type
 const _ = require('partial-js')
 const expect = require('expect')
 describe(`ch5`, () => {
@@ -351,6 +353,21 @@ describe(`ch5`, () => {
     it('5-63 some', () => {
       expect(x.some([0, 0, 1, 0, 2])).toBe(true)
       expect(x.some([0, 0, 1, 0, 2], v => v > 2)).toBe(false)
+    })
+    const list = [1, 2, 3, 4, 5, 6]
+    it('5-68 strict execution: map->filter', () => {
+      expect(_.go(list,
+        _.map(v => v * v),
+        _.filter(v => v < 20)
+      )).toEqual([1, 4, 9, 16])
+    })
+    it('5-69 lazy execution 3: L.map->L.filter', () => {
+      expect(_.go(list,
+        L.map(v => v * v),
+        L.filter(v => v < 20),
+        L.loop((r, v) => r.concat(v), [])
+        // L.map(v => v)
+      )).toEqual([1, 4, 9, 16])
     })
   })
 })
