@@ -50,16 +50,17 @@
 
       $.val = function (input) {
         if (input.type === 'checkbox') return input.checked
-
         return input.nodeName === 'SELECT' || _.contains(['radio', 'number'], input.type) ? if_arr_map($(input).val(), numeric_to_int) : $(input).val()
       }
 
       function inputs_to_obj(inputs) {
-        return _.pipe(
-          _.reject(input => input.type === 'radio' && !input.checked),
-          _.map(_.all(_.v('name'), $.val)),
-          _.object,
-        )(...arguments)
+
+        return _.reduce(inputs, (obj, input) => {
+          if (input.type === 'radio' && !input.checked) return obj
+          obj[input.name] = $.val(input)
+          return obj
+        }, {})
+
       }
 
       function form_to_obj($parent) {
