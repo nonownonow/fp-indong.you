@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet"/>
+    <script src="jquery.js"></script>
+    <script src="partial.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="mocha"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.0.1/mocha.min.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.1.2/chai.min.js"></script>-->
+    <script src="https://unpkg.com/expect@1.20.2/umd/expect.min.js"></script>
+    <form>
+        <input type="email" name="email" title='email' value="marpple@gmail.com">
+        <input type="text" name="nickname" title="nickname" value="Cojamm">
+        <input type="text" name="title" title="title" value="high!">
+        <input type="number" name="age" value="20" title="age">
+        <textarea name="body" cols="30" rows="10" title="body">high!</textarea>
+        <input type="radio" name="type" value="1" title="type">
+        <input type="radio" name="type" value="2" title="type" checked>
+        <select name="categories" title="categories" multiple>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+        </select>
+        <input type="checkbox" name="bool" title="bool">
+
+
+    </form>
+    <script>
+      mocha.setup('bdd')
+
+      function inputs_to_obj(inputs) {
+        return _.reduce(inputs, (obj, input) => {
+          if (input.type === 'radio' && !input.checked) return obj
+          if (input.type === 'checkbox') {
+            obj[input.name] = input.checked
+          } else {
+            obj[input.name] = $(input).val()
+          }
+          return obj
+        }, {})
+      }
+
+      function form_to_obj($parent) {
+        return inputs_to_obj($('[name]', $parent))
+      }
+
+      const res = inputs_to_obj($('select, textarea'))
+      const res2 = inputs_to_obj($('[type="checkbox"], textarea'))
+      const res3 = form_to_obj($('form'))
+      describe('test', () => {
+        it('test', () => {
+          expect(res).toEqual({"body": "high!", "categories": ["1", "3"]})
+        })
+        it('test', () => {
+          expect(res2).toEqual({body: "high!", bool: false})
+        })
+        it('form_to_obj', () => {
+          // expect(res3).toEqual({
+          //   "email": "marpple@gmail.com", "nickname": "Cojamm", "title": "하이!", "age": 20,
+          //   "body": "안녕하세요!", "type": "2", "categories": ["1", "3"], "bool": false
+          // })
+        })
+      })
+      mocha.run();
+    </script>
+</body>
+</html>
