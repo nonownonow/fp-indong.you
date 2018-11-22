@@ -62,10 +62,11 @@
           expect(res2).toEqual({body: "high!", bool: false})
         })
         it('form_to_obj', () => {
-          // expect(res3).toEqual({
-          //   "email": "marpple@gmail.com", "nickname": "Cojamm", "title": "하이!", "age": 20,
-          //   "body": "안녕하세요!", "type": "2", "categories": ["1", "3"], "bool": false
-          // })
+          expect(_.size(res3)).toBe(8)
+          expect(res3).toInclude({
+            "email": "marpple@gmail.com", "nickname": "Cojamm", "title": "high!", "age": 20,
+            "body": "high!", "type": "2", "categories": ["1", "3"], "bool": false
+          })
         })
       })
       mocha.run();
