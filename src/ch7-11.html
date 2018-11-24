@@ -57,7 +57,7 @@
       function inputs_to_obj(inputs) {
         return _.pipe(
           _.reject(input => input.type === 'radio' && !input.checked),
-          _.all(_.pluck('name'), _.map($.val)),
+          _.map(_.all(_.v('name'), $.val)),
           _.object,
         )(...arguments)
       }
