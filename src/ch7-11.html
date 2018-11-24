@@ -16,76 +16,54 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/4.0.1/mocha.min.js"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.1.2/chai.min.js"></script>-->
     <script src="https://unpkg.com/expect@1.20.2/umd/expect.min.js"></script>
-    <form>
-        <input type="email" name="email" title='email' value="marpple@gmail.com">
-        <input type="text" name="nickname" title="nickname" value="Cojamm">
-        <input type="text" name="title" title="title" value="high!">
-        <input type="number" name="age" value="20" title="age">
-        <textarea name="body" cols="30" rows="10" title="body">high!</textarea>
-        <input type="radio" name="type" value="1" title="type" checked>
-        <input type="radio" name="type" value="2" title="type">
-        <select name="categories" title="categories" multiple>
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3" selected>3</option>
-        </select>
-        <input type="checkbox" name="bool" title="bool">
 
-
-    </form>
     <script>
       mocha.setup('bdd')
-
-      function is_numeric(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n)
+      const products = [
+        {
+          id: 1,
+          name: "반팔티",
+          price: 10000, // <--- 상품의 기본 가격
+          sizes: [
+            {name: "M", price: 0},
+            {name: "L", price: 0},
+            {name: "XL", price: 0},
+            {name: "2XL", price: 1000} // <--- 해당 상품의 사이즈별 추가 금액
+          ]
+        },
+        {
+          id: 2,
+          name: "후드티",
+          price: 21000,
+          sizes: [
+            {name: "L", price: -1000},
+            {name: "XL", price: 0},
+            {name: "2XL", price: 3000}
+          ]
+        },
+        {
+          id: 3,
+          name: "맨투맨",
+          price: 16000,
+          sizes: [
+            {name: "L", price: 0},
+            {name: "XL", price: 0},
+            {name: "2XL", price: 2000}
+          ]
+        }
+      ]
+      function order_price(products, size_name){
+        return products.price+_.find_where(products.sizes,{name:size_name}).price
       }
 
-      function numeric_to_int(n) {
-        return is_numeric(n) ? parseFloat(n) : n
-      }
-
-      function if_arr_map(val, iter) {
-        return _.is_array(val) ? _.map(val, iter) : iter(val)
-      }
-
-      $.val = function (input) {
-        if (input.type === 'checkbox') return input.checked
-        return input.nodeName === 'SELECT' || _.contains(['radio', 'number'], input.type) ? if_arr_map($(input).val(), numeric_to_int) : $(input).val()
-      }
-
-      function inputs_to_obj(inputs) {
-
-        return _.reduce(inputs, (obj, input) => {
-          if (input.type === 'radio' && !input.checked) return obj
-          obj[input.name] = $.val(input)
-          return obj
-        }, {})
-
-      }
-
-      function form_to_obj($parent) {
-        return inputs_to_obj($('[name]', $parent))
-      }
-
-      const res = inputs_to_obj($('select, textarea'))
-      const res2 = inputs_to_obj($('[type="checkbox"], textarea'))
-      const res3 = form_to_obj($('form'))
-      describe('test', () => {
-        it('test', () => {
-          expect(res).toEqual({"body": "high!", "categories": [1, 3]})
-        })
-        it('test', () => {
-          expect(res2).toEqual({body: "high!", bool: false})
-        })
-        it('form_to_obj', () => {
-          expect(_.size(res3)).toBe(8)
-          console.log(res3)
-          expect(res3).toInclude({
-            "email": "marpple@gmail.com", "nickname": "Cojamm", "title": "high!", "age": 20,
-            "body": "high!", "type": 1, "categories": [1, 3], "bool": false
-          }, (a, b) => !_.isArray(a) ? a === b : _.isEqual(a, b))
+      describe('17',()=>{
+        describe('order_price', ()=>{
+          it('select price about choosen products and choosen option', ()=>{
+            expect(order_price(products[0], "XL")).toBe(10000)
+          })
         })
       })
+
       mocha.run();
     </script>
 </body>
