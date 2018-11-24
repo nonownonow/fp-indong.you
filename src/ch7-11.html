@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet"/>
     <script src="jquery.js"></script>
-    <script src="partial.js"></script>
+    <!--<script src="partial.js"></script>-->
+    <script src="https://unpkg.com/partial-js@1.1.6/partial.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -35,14 +36,22 @@
     <script>
       mocha.setup('bdd')
 
+
       function inputs_to_obj(inputs) {
         return _.pipe(
-          _.reject(input=>input.type==='radio'&&!input.checked),
-          _.all(
-            _.pluck('name'),
-            _.map(input=>input.type==='checkbox'?input.checked:$(input).val())
+          _.reject(input => input.type === 'radio' && !input.checked),
+          _.partition(input => input.type === 'checkbox'),
+          _.to_mr,
+          _.spread(
+            __(_.map(input => [input.name, input.checked]), _.object),
+            __(_.map(input => [input.name, $(input).val()]), _.object)
           ),
-          _.object
+          _.extend
+          // _.all(
+          //   _.pluck('name'),
+          //   _.map(input=>input.type==='checkbox'?input.checked:$(input).val())
+          // ),
+          // _.object
         )(...arguments)
       }
 
