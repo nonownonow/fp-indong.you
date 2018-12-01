@@ -55,16 +55,38 @@
       function order_price(products, size_name){
         return products.price+_.find_where(products.sizes,{name:size_name}).price
       }
-
+      function find_where(coll, attrs){
+        // return _.find(coll, obj=>{
+        //   const keys = _.keys(attrs)
+        //   for(let i = 0, l=keys.length, key; i<l;i++){
+        //     key = keys[i]
+        //     if(obj[key] !== attrs[key]) return false
+        //   }
+        //   return true
+        // })
+        return _.find(coll, obj=>{
+          return _.every(attrs, (val, key)=>{
+            return obj[key]===val
+          })
+        })
+      }
       describe('17',()=>{
         describe('order_price', ()=>{
           it('select price about choosen products and choosen option', ()=>{
             expect(order_price(products[0], "XL")).toBe(10000)
           })
         })
+        describe('find_where', ()=>{
+          it('', ()=>{
+            expect(find_where([{id:1, name:'ID'},{id:2, name:'CJ'}], {id:1})).toEqual({id:1, name:"ID"})
+
+          })
+          // expect(find_where(products.sizes,{name:size_name})).toBe({name: "XL", price: 0})
+        })
       })
 
       mocha.run();
     </script>
+
 </body>
 </html>
