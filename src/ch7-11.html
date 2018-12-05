@@ -56,14 +56,6 @@
         return products.price+_.find_where(products.sizes,{name:size_name}).price
       }
       function find_where(coll, attrs){
-        // return _.find(coll, obj=>{
-        //   const keys = _.keys(attrs)
-        //   for(let i = 0, l=keys.length, key; i<l;i++){
-        //     key = keys[i]
-        //     if(obj[key] !== attrs[key]) return false
-        //   }
-        //   return true
-        // })
         return _.find(coll, obj=>{
           return _.every(attrs, (val, key)=>{
             return obj[key]===val
