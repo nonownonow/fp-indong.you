@@ -117,5 +117,15 @@ describe.only('ch7', () => {
         expect(x.selected_total_quantity(products)).toBe(11)
       })
     })
+    describe('7-25 sum the price of items selected', ()=>{
+      it('total_price', ()=>{
+        expect(x.total_price(products)).toBe(221000)
+      })
+    })
+    describe('7-26', ()=>{
+      it('total', ()=>{
+        expect(x.total(products)).toEqual({quantity:15, price: 221000})
+      })
+    })
   })
 })

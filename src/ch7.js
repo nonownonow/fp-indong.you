@@ -46,3 +46,19 @@ export const selected_total_quantity = __(
   _.filter('is_selected'),
   total_quantity
 )
+export const total_price = _.reduce((r, v) => {
+  return _.reduce(v.sizes, (rr, vv) => {
+    return rr + (v.price + vv.price) * vv.quantity
+  }, r)
+}, 0)
+export const selected_total_price = __(
+  _.filter('is_selected'),
+  total_price
+)
+export const total = _.reduce((r, v) => {
+  return _.reduce(v.sizes, (rr, vv) => {
+    rr.quantity += vv.quantity
+    rr.price += (v.price + vv.price) * vv.quantity
+    return rr
+  }, r)
+}, { quantity: 0, price: 0 })
