@@ -19,6 +19,15 @@
     <splitter split-orientation="horizontal" split-proportion="0.5472876">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="253">
+                  <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.temp/partial.js">
               <provider selected="true" editor-type-id="text-editor">
@@ -31,15 +40,6 @@
             </entry>
           </file>
           <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/.temp/함수형-자바스크립트-프로그래밍-책-예제/7.3-커머스-서비스-코드-조각.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/ch7.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="238">
@@ -153,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/src/index.js" />
@@ -161,6 +160,7 @@
         <option value="$PROJECT_DIR$/.temp/함수형-자바스크립트-프로그래밍-책-예제/7.3-커머스-서비스-코드-조각.html" />
         <option value="$PROJECT_DIR$/src/ch7.js" />
         <option value="$PROJECT_DIR$/test/ch7.spec.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -188,7 +188,7 @@
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <autoscrollFromSource Scope="true" />
+      <autoscrollFromSource Scope="true" ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -199,21 +199,21 @@
               <item name="fn-js-book.in.dong.you" type="b2602c69:ProjectViewProjectNode" />
               <item name="fn-js-book.in.dong.you" type="462c0819:PsiDirectoryNode" />
             </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
+          <expand>
             <path>
-              <item name="fn-js-book.in.dong.you" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fn-js-book.in.dong.you" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="fn-js-book.in.dong.you" type="b2602c69:ProjectViewProjectNode" />
-              <item name="fn-js-book.in.dong.you" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="fn-js-book.in.dong.you" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,10 +248,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Mocha.ch7">
-    <configuration name="ch7-11.html" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/fn-js-book.in.dong.you/src/ch7-11.html">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="JavaScript Debug.ch7-11.html">
     <list>
       <item itemvalue="JavaScript Debug.ch7-11.html" />
       <item itemvalue="Mocha.ch7" />
@@ -284,7 +281,7 @@
       <workItem from="1543905871000" duration="1027000" />
       <workItem from="1544020608902" duration="3294000" />
       <workItem from="1544415609184" duration="2714000" />
-      <workItem from="1544625148443" duration="4070000" />
+      <workItem from="1544625148443" duration="4466000" />
     </task>
     <servers />
   </component>
@@ -321,7 +318,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65460000" />
+    <option name="totallyTimeSpent" value="65856000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="800" extended-state="0" />
@@ -391,13 +388,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1058">
           <caret line="46" column="9" selection-start-line="46" selection-start-column="9" selection-end-line="46" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="16" column="15" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -550,6 +540,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="71" column="6" selection-start-line="71" selection-start-column="6" selection-end-line="71" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
         </state>
       </provider>
     </entry>
