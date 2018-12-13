@@ -1,7 +1,7 @@
 .DS_store
 .temp
 .vscode
-.idea
+
 node_modules
 dist
 coverage
