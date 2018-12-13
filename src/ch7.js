@@ -38,10 +38,19 @@ export function find_where (coll, attrs) {
   return _.find(coll, __(_.identity, _.partial(is_matched, _, attrs)))
 }
 
-export const total_quantity = _.reduce((r, v) => {
-  return _.reduce(v.sizes, (r, v) => r + v.quantity, r)
-}, 0)
-
+// export const total_quantity = _.reduce((r, v) => {
+//   return _.reduce(v.sizes, (r, v) => r + v.quantity, r)
+// }, 0)
+// export const total_quantity = function(products){
+//   const quantitys = _.deep_pluck(products, 'sizes.quantity')
+//   return _.reduce(quantitys, (r, v)=>{
+//     return r+v
+//   },0)
+// }
+export const total_quantity = __(
+  _.deep_pluck('sizese.quantity'),
+  _.reduce((a,b)=>a+b)
+)
 export const selected_total_quantity = __(
   _.filter('is_selected'),
   total_quantity

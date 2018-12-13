@@ -82,7 +82,7 @@ describe.only('ch7', () => {
       })
     })
   })
-  describe.only('7-3-3 sum the quantity of items in basket', () => {
+  describe('7-3-3 sum the quantity of items in basket', () => {
     const products = [
       {
         is_selected: true, // <--- 장바구니에서 체크 박스 선택
@@ -126,6 +126,22 @@ describe.only('ch7', () => {
       it('total', ()=>{
         expect(x.total(products)).toEqual({quantity:15, price: 221000})
       })
+    })
+
+  })
+  describe.only('7.4', ()=>{
+    function delay(result){
+      return new Promise(function(resolve, reject){
+        setTimeout(function(){
+          resolve(result)
+        }, 1000)
+      })
+    }
+    it('', (done)=>{
+      expect(delay(5).then(res=>{
+        console.log(res)
+        done()
+      }))
     })
   })
 })
