@@ -117,31 +117,40 @@ describe.only('ch7', () => {
         expect(x.selected_total_quantity(products)).toBe(11)
       })
     })
-    describe('7-25 sum the price of items selected', ()=>{
-      it('total_price', ()=>{
+    describe('7-25 sum the price of items selected', () => {
+      it('total_price', () => {
         expect(x.total_price(products)).toBe(221000)
       })
     })
-    describe('7-26', ()=>{
-      it('total', ()=>{
-        expect(x.total(products)).toEqual({quantity:15, price: 221000})
+    describe('7-26', () => {
+      it('total', () => {
+        expect(x.total(products)).toEqual({ quantity: 15, price: 221000 })
       })
     })
-
   })
-  describe.only('7.4', ()=>{
-    function delay(result){
-      return new Promise(function(resolve, reject){
-        setTimeout(function(){
+  describe.only('7.4', () => {
+    function delay (result) {
+      return new Promise(function (resolve, reject) {
+        setTimeout(function () {
           resolve(result)
-        }, 1000)
+        }, 100)
       })
     }
-    it('', (done)=>{
-      expect(delay(5).then(res=>{
+
+    it('', (done) => {
+      expect(delay(5).then(res => {
         console.log(res)
         done()
       }))
+    })
+    describe('7.4.4 stop when it face to true', () => {
+      it('_find', async () => {
+        const res = await _.find([10, 20, 50, 100], async (v) => {
+          console.log(v)
+          return await delay(v) > 30
+        })
+        expect(res).toBe(50)
+      })
     })
   })
 })
